@@ -1,4 +1,7 @@
-package se.disabledsecurity.borg.alcove;
+package se.disabledsecurity.borg.alcove.model.external;
 
-public class Location {
+import lombok.Builder;
+
+@Builder
+public record Location(String county, String municipality, String code) {
 }

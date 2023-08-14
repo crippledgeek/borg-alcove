@@ -1,1 +1,13 @@
+spring:
+  application:
+    name: borg-alcove
+  cloud:
+    config:
+      enabled: false
+eureka:
+  client:
+    enabled: false
 
+management:
+  tracing:
+    enabled: false
