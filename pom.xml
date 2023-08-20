@@ -111,6 +111,10 @@
                             <artifactId>lombok</artifactId>
                         </exclude>
                     </excludes>
+                    <docker>
+                        <host>${local.socket}</host>
+                        <bindHostToBuilder>${docker.hostBuilder}</bindHostToBuilder>
+                    </docker>
                 </configuration>
             </plugin>
         </plugins>
