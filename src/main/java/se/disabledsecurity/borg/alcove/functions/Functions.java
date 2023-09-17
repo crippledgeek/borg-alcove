@@ -4,6 +4,8 @@ import com.fasterxml.jackson.dataformat.csv.CsvMapper;
 import com.fasterxml.jackson.dataformat.csv.CsvSchema;
 import io.vavr.Function0;
 
+import java.util.function.UnaryOperator;
+
 public class Functions {
 
 	private Functions() {}
@@ -17,4 +19,6 @@ public class Functions {
 			.withColumnSeparator(';')).memoized();
 
 	public static final Function0<CsvMapper> csvMapper = Function0.of(CsvMapper::new).memoized();
+
+	public static final UnaryOperator<String> trim = String::trim;
 }
