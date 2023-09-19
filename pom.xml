@@ -17,6 +17,7 @@
         <java.version>17</java.version>
         <spring-cloud.version>2022.0.4</spring-cloud.version>
         <vavr.version>0.10.4</vavr.version>
+        <java-snapshot-testing-junit5.version>4.0.6</java-snapshot-testing-junit5.version>
     </properties>
     <dependencies>
         <dependency>
@@ -75,6 +76,12 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>io.github.origin-energy</groupId>
+            <artifactId>java-snapshot-testing-junit5</artifactId>
+            <version>${java-snapshot-testing-junit5.version}</version>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
     <dependencyManagement>
         <dependencies>
@@ -94,20 +101,17 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
-                    <jvmArguments>
-                        -XX:+AllowRedefinitionToAddDeleteMethods
-
-                    </jvmArguments>
+                    <imageName>${project.groupId}/${project.artifactId}:${project.version}</imageName>
+                    <imageBuilder>paketobuildpacks/builder-jammy-tiny</imageBuilder>
+                       <layers>
+                            <enabled>true</enabled>
+                        </layers>
                     <excludes>
                         <exclude>
                             <groupId>org.projectlombok</groupId>
                             <artifactId>lombok</artifactId>
                         </exclude>
                     </excludes>
-                    <docker>
-                        <host>${local.socket}</host>
-                        <bindHostToBuilder>${docker.hostBuilder}</bindHostToBuilder>
-                    </docker>
                 </configuration>
             </plugin>
         </plugins>
