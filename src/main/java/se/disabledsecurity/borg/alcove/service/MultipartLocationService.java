@@ -10,13 +10,17 @@ import java.util.List;
 @Service
 public class MultipartLocationService implements LocationService {
 	private final FileService fileService;
+	private final DatabaseService databaseService;
 
-	public MultipartLocationService(FileService fileService) {
+	public MultipartLocationService(FileService fileService, DatabaseService databaseService) {
 		this.fileService = fileService;
+		this.databaseService = databaseService;
 	}
 
 	@Override
 	public List<Location> handleFileUpload(MultipartFile file) {
-		return LocationMapper.map(fileService.handleFileUpload(file));
+		List<Location> locations = LocationMapper.map(fileService.handleFileUpload(file));
+		var counties = databaseService.saveAllCounties(locations);
+		return LocationMapper.mapToFrontendModel(counties);
 	}
 }

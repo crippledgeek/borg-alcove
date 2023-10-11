@@ -1,6 +1,7 @@
 package se.disabledsecurity.borg.alcove.mapper;
 
 import se.disabledsecurity.borg.alcove.model.internal.County;
+import se.disabledsecurity.borg.alcove.model.internal.Location;
 
 import java.util.List;
 
@@ -24,4 +25,14 @@ public class LocationMapper {
 						.build())
 				.toList();
 	}
+
+	public static List<Location> mapToFrontendModel(List<County> counties) {
+		return counties
+				.stream()
+				.map(county -> se.disabledsecurity.borg.alcove.model.internal.Location
+						.builder()
+						.county(county)
+						.build())
+				.toList();
 	}
+}

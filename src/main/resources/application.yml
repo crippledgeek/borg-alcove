@@ -4,6 +4,20 @@ spring:
   cloud:
     config:
       enabled: false
+  datasource:
+    username: postgres
+    password: postgres
+    url: jdbc:postgresql://localhost:5438/locations
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    generate-ddl: true
+    show-sql: true
+    hibernate:
+      ddl-auto: validate
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+        implicit-strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyJpaCompliantImpl
+    open-in-view: false
 eureka:
   client:
     enabled: false
