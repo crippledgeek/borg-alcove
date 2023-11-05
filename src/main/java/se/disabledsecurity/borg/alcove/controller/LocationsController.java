@@ -5,10 +5,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
-import se.disabledsecurity.borg.alcove.model.internal.Location;
+import se.disabledsecurity.borg.alcove.model.internal.Locations;
 import se.disabledsecurity.borg.alcove.service.LocationService;
-
-import java.util.Collection;
 
 
 @RequestMapping("api")
@@ -22,7 +20,7 @@ public class LocationsController {
 	}
 
 	@PostMapping("/locations")
-	public Collection<Location> uploadLocations(@RequestParam("locations") MultipartFile file) {
+	public Locations uploadLocations(@RequestParam("locations") MultipartFile file) {
 		return locationService.handleFileUpload(file);
 	}
 }

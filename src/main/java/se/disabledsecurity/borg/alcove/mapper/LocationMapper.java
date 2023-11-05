@@ -4,13 +4,15 @@ import se.disabledsecurity.borg.alcove.model.internal.County;
 import se.disabledsecurity.borg.alcove.model.internal.Location;
 
 import java.util.List;
+import java.util.function.Function;
 
 public class LocationMapper {
 	private LocationMapper() {
 	}
 
-	public static List<se.disabledsecurity.borg.alcove.model.internal.Location> map(List<se.disabledsecurity.borg.alcove.model.external.Location> locations) {
-		return CountyMapper
+
+	public static final Function<List<se.disabledsecurity.borg.alcove.model.external.Location>, List<se.disabledsecurity.borg.alcove.model.internal.Location>> map = locations ->
+		CountyMapper
 				.map(locations.stream())
 				.stream()
 				.map(county -> County
@@ -26,13 +28,3 @@ public class LocationMapper {
 				.toList();
 	}
 
-	public static List<Location> mapToFrontendModel(List<County> counties) {
-		return counties
-				.stream()
-				.map(county -> se.disabledsecurity.borg.alcove.model.internal.Location
-						.builder()
-						.county(county)
-						.build())
-				.toList();
-	}
-}

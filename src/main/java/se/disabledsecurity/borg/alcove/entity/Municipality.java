@@ -1,16 +1,20 @@
 package se.disabledsecurity.borg.alcove.entity;
 
+import jakarta.persistence.Cacheable;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.persistence.Version;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.proxy.HibernateProxy;
 
 import java.util.Objects;
@@ -20,6 +24,7 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
+@Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = "Municipality")
 @Entity
 @Table(name = "municipality")
 public class Municipality {
@@ -33,6 +38,10 @@ public class Municipality {
 
 	@Column(name = "code", nullable = false)
 	private int code;
+
+	@Version
+	@Column(name = "version")
+	private Integer version;
 
 	@Override
 	public final boolean equals(Object o) {

@@ -27,7 +27,7 @@ public class CSVFileService implements FileService {
 									   .with(locationsSchema.get())
 									   .<Location>readValues(file.getInputStream()))
 				.of((i, objectMappingIterator) -> objectMappingIterator.readAll())
-				.onSuccess(LocationMapper::map)
+				.onSuccess(LocationMapper.map::apply)
 				.onFailure(e -> log.error("Failed to parse CSV file", e))
 				.toJavaList()
 				.stream()

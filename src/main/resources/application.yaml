@@ -1,0 +1,54 @@
+spring:
+  application:
+    name: borg-alcove
+
+  cloud:
+    config:
+      enabled: false
+  datasource:
+    username: postgres
+    password: postgres
+    url: jdbc:postgresql://localhost:5438/locations
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    generate-ddl: true
+    hibernate:
+      ddl-auto: validate
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+        implicit-strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyJpaCompliantImpl
+    open-in-view: false
+    properties:
+      hibernate:
+        javax:
+          persistence:
+            sharedCache:
+              mode: ENABLE_SELECTIVE
+          cache:
+            provider: org.ehcache.jsr107.EhcacheCachingProvider
+            default_cache_concurrency_strategy: read-write
+            missing_cache_strategy: create
+        cache:
+          use_second_level_cache: true
+          use_query_cache: true
+          region.factory_class: jcache
+          use_structured_entries: true
+        generate_statistics: true
+  jackson:
+    default-property-inclusion: non_absent
+eureka:
+  client:
+    enabled: false
+
+management:
+  tracing:
+    enabled: false
+
+
+logging:
+  level:
+    org.hibernate.SQL: trace
+    org.hibernate.orm.jdbc.bind: trace
+    org.hibernate.stat: trace
+    org.hibernate.SQL_SLOW: trace
+    org.hibernate.cache: trace

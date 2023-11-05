@@ -2,9 +2,9 @@ package se.disabledsecurity.borg.alcove.service;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import se.disabledsecurity.borg.alcove.entity.County;
 import se.disabledsecurity.borg.alcove.mapper.DatabaseCountyMapper;
 import se.disabledsecurity.borg.alcove.mapper.DatabaseMunicipalityMapper;
+import se.disabledsecurity.borg.alcove.model.internal.County;
 import se.disabledsecurity.borg.alcove.model.internal.Location;
 import se.disabledsecurity.borg.alcove.repositories.CountyRepository;
 import se.disabledsecurity.borg.alcove.repositories.MunicipalityRepository;
@@ -41,6 +41,21 @@ public class PostgresService implements DatabaseService {
 				.toList();
 
 
+	}
+
+	@Override
+	@Transactional
+	public County searchCountyByName(String name) {
+		return databaseCountyMapper.toDto(countyRepository
+				.findByNameContainingIgnoreCase(name));
+
+	}
+
+	@Override
+	@Transactional
+	public County searchMunicipalitiesByName(String name) {
+		return databaseCountyMapper.toDto(countyRepository
+				.findCountyByMunicipality(name));
 	}
 
 }
