@@ -1,12 +1,12 @@
 package se.disabledsecurity.borg.alcove.service;
 
-import org.springframework.cache.annotation.Cacheable;
+import io.micrometer.observation.annotation.Observed;
 import org.springframework.stereotype.Service;
 import se.disabledsecurity.borg.alcove.functions.Functions;
 import se.disabledsecurity.borg.alcove.model.internal.Locations;
 
 import java.util.stream.Stream;
-
+@Observed
 @Service
 public class InternalSearchService implements SearchService {
 	private final DatabaseService databaseService;
@@ -25,6 +25,9 @@ public class InternalSearchService implements SearchService {
 
 	@Override
 	public Locations searchMunicipalitiesByName(String name) {
-		return null;
+		return Functions.map.apply(
+				Stream.of(databaseService.
+				searchMunicipalitiesByName(name))
+				.toList());
 	}
 }

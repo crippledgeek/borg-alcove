@@ -1,5 +1,6 @@
 package se.disabledsecurity.borg.alcove.service;
 
+import io.micrometer.observation.annotation.Observed;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import se.disabledsecurity.borg.alcove.functions.Functions;
@@ -9,6 +10,7 @@ import se.disabledsecurity.borg.alcove.model.internal.Locations;
 
 import java.util.List;
 
+@Observed
 @Service
 public class MultipartLocationService implements LocationService {
 	private final FileService fileService;

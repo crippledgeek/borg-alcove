@@ -5,7 +5,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.1.4</version>
+        <version>3.2.0</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>se.disabledsecurity</groupId>
@@ -15,11 +15,13 @@
     <description>borg-alcove</description>
     <properties>
         <java.version>21</java.version>
-        <spring-cloud.version>2022.0.4</spring-cloud.version>
+        <spring-cloud.version>2023.0.0-RC1</spring-cloud.version>
         <vavr.version>0.10.4</vavr.version>
         <java-snapshot-testing-junit5.version>4.0.6</java-snapshot-testing-junit5.version>
         <org.mapstruct.version>1.5.5.Final</org.mapstruct.version>
         <lombok-mapstruct-binding.version>0.2.0</lombok-mapstruct-binding.version>
+        <imageName>${docker.image.prefix}/${project.artifactId}:${project.version}</imageName>
+        <docker.image.prefix>disabledsecurity</docker.image.prefix>
     </properties>
     <dependencies>
         <dependency>
@@ -185,5 +187,16 @@
             </plugin>
         </plugins>
     </build>
+    <repositories>
+
+        <repository>
+            <id>spring-milestones</id>
+            <name>Spring Milestones</name>
+            <url>https://repo.spring.io/milestone</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
 
 </project>

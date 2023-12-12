@@ -26,6 +26,6 @@ public class SearchController {
 	@GetMapping("/municipalities/search")
 	public Locations searchMunicipalitiesByName(@RequestParam String name) {
 		// Implement the logic to search for municipalities by name using municipalityService
-		return null;
+		return searchService.searchMunicipalitiesByName(name);
 	}
 }

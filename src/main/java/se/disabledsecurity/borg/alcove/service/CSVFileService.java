@@ -1,5 +1,6 @@
 package se.disabledsecurity.borg.alcove.service;
 
+import io.micrometer.observation.annotation.Observed;
 import io.vavr.control.Try;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -15,6 +16,7 @@ import static se.disabledsecurity.borg.alcove.functions.Functions.locationsSchem
 
 @Slf4j
 @Service
+@Observed
 public class CSVFileService implements FileService {
 
 	@Override
