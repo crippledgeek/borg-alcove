@@ -5,7 +5,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.2.2</version>
+        <version>3.2.3</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>se.disabledsecurity</groupId>
@@ -15,7 +15,7 @@
     <description>borg-alcove</description>
     <properties>
         <java.version>21</java.version>
-        <spring-cloud.version>2023.0.0-RC1</spring-cloud.version>
+        <spring-cloud.version>2023.0.0</spring-cloud.version>
         <vavr.version>0.10.4</vavr.version>
         <java-snapshot-testing-junit5.version>4.0.6</java-snapshot-testing-junit5.version>
         <org.mapstruct.version>1.5.5.Final</org.mapstruct.version>
@@ -133,11 +133,17 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
-                    <imageName>${project.groupId}/${project.artifactId}:${project.version}</imageName>
+                    <image>
+                        <env>
+                            <BP_HEALTH_CHECKER_ENABLED>true</BP_HEALTH_CHECKER_ENABLED>
+                        </env>
+                        <buildpacks>
+                            <buildpack>urn:cnb:builder:paketo-buildpacks/java</buildpack>
+                            <buildpack>gcr.io/paketo-buildpacks/health-checker:latest</buildpack>
+                        </buildpacks>
+                        <name>${imageName}</name>
+                    </image>
                     <imageBuilder>paketobuildpacks/builder-jammy-tiny</imageBuilder>
-                       <layers>
-                            <enabled>true</enabled>
-                        </layers>
                     <excludes>
                         <exclude>
                             <groupId>org.projectlombok</groupId>
@@ -187,16 +193,4 @@
             </plugin>
         </plugins>
     </build>
-    <repositories>
-
-        <repository>
-            <id>spring-milestones</id>
-            <name>Spring Milestones</name>
-            <url>https://repo.spring.io/milestone</url>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-        </repository>
-    </repositories>
-
 </project>

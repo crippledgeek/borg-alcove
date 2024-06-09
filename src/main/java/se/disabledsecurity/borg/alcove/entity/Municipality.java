@@ -24,7 +24,7 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
-@Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = "Municipality")
+@Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = "municipalities")
 @Entity
 @Table(name = "municipality")
 public class Municipality {

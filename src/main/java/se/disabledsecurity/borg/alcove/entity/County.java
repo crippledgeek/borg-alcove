@@ -17,16 +17,14 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
-import org.springframework.cache.annotation.Cacheable;
 
-
-import java.util.LinkedHashSet;
+import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
 
 @Getter
 @Entity
-@Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = "County")
+@Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = "counties")
 @Builder
 @Table(name = "county")
 @NoArgsConstructor
@@ -42,10 +40,9 @@ public class County {
 
 	@Column(name = "code", nullable = false, unique = true)
 	private int code;
-
-	@org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+	@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE, region = "municipalities-county")
 	@OneToMany(orphanRemoval = true, fetch = FetchType.LAZY,cascade = CascadeType.PERSIST)
-	private Set<Municipality> municipalities = new LinkedHashSet<>();
+	private Set<Municipality> municipalities = new HashSet<>();
 
 	@Version
 	@Column(name = "version")

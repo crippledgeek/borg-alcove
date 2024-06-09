@@ -23,7 +23,7 @@ public class CountyMapper {
 				.stream().
 				map(entry -> County.builder()
 						.name(Functions.trim.apply(entry.getKey()))
-						.code(CountyCodeMapper.map.applyAsInt(entry.getValue().get(0).code()))
+						.code(CountyCodeMapper.map.applyAsInt(entry.getValue().getFirst().code()))
 						.municipalities(MunicipalityMapper.map(entry.getValue()))
 						.build())
 				.toList();

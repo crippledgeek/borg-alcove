@@ -1,8 +1,11 @@
 package se.disabledsecurity.borg.alcove.service;
 
 import io.micrometer.observation.annotation.Observed;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.repository.query.FluentQuery;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import se.disabledsecurity.borg.alcove.functions.JpaExampleFunctions;
 import se.disabledsecurity.borg.alcove.mapper.DatabaseCountyMapper;
 import se.disabledsecurity.borg.alcove.mapper.DatabaseMunicipalityMapper;
 import se.disabledsecurity.borg.alcove.model.internal.County;
@@ -47,16 +50,15 @@ public class PostgresService implements DatabaseService {
 	@Override
 	@Transactional
 	public County searchCountyByName(String name) {
-		return databaseCountyMapper.toDto(countyRepository
-				.findByNameContainingIgnoreCase(name));
-
+		return databaseCountyMapper.toDto(countyRepository.findOne(JpaExampleFunctions.findCountyByName.apply(name)).
+				orElse(se.disabledsecurity.borg.alcove.entity.County.builder().build()));
 	}
 
 	@Override
 	@Transactional
-	public County searchMunicipalitiesByName(String name) {
-		return databaseCountyMapper.toDto(countyRepository
-				.findCountyByMunicipality(name));
+	public List<County> searchMunicipalitiesByName(String name) {
+		return databaseCountyMapper.toDtos(countyRepository.findByMunicipalityNameContaining(name));
 	}
+
 
 }

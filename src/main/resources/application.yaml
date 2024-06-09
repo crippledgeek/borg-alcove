@@ -10,6 +10,7 @@ spring:
     password: postgres
     url: jdbc:postgresql://localhost:5438/locations
     driver-class-name: org.postgresql.Driver
+   
   jpa:
     generate-ddl: true
     hibernate:
@@ -34,6 +35,7 @@ spring:
           region.factory_class: jcache
           use_structured_entries: true
         generate_statistics: true
+        format_sql: true
   jackson:
     default-property-inclusion: non_absent
   threads:
@@ -46,6 +48,10 @@ eureka:
 management:
   tracing:
     enabled: false
+  endpoints:
+    jmx:
+      exposure:
+        include: "*"
 
 
 logging:

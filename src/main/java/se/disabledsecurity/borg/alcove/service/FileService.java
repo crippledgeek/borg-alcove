@@ -5,6 +5,6 @@ import se.disabledsecurity.borg.alcove.model.external.Location;
 
 import java.util.List;
 
-public interface FileService {
+public interface FileService  {
 	List<Location> handleFileUpload(MultipartFile file);
 }

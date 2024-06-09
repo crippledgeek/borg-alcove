@@ -8,5 +8,5 @@ import java.util.List;
 public interface DatabaseService {
 	List<County> saveAllCounties(List<Location> locations);
 	County searchCountyByName(String name);
-	County searchMunicipalitiesByName(String name);
+	List<County> searchMunicipalitiesByName(String name);
 }
