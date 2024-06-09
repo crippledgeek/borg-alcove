@@ -1,0 +1,136 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1697809001435-1
+      author: matte (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                  name: code
+                  type: INTEGER
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: county_pkey
+                  name: id
+                  type: UUID
+              - column:
+                  constraints:
+                    nullable: false
+                  name: name
+                  type: VARCHAR(255)
+            tableName: county
+  - changeSet:
+      id: 1697809001435-2
+      author: matte (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: county_municipality_pkey
+                  name: county_id
+                  type: UUID
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: county_municipality_pkey
+                  name: municipalities_id
+                  type: UUID
+            tableName: county_municipality
+  - changeSet:
+      id: 1697809001435-3
+      author: matte (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                  name: code
+                  type: INTEGER
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: municipality_pkey
+                  name: id
+                  type: UUID
+              - column:
+                  constraints:
+                    nullable: false
+                  name: name
+                  type: VARCHAR(255)
+            tableName: municipality
+  - changeSet:
+      id: 1697809001435-4
+      author: matte (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addUniqueConstraint:
+            columnNames: code
+            constraintName: county_code_key
+            tableName: county
+  - changeSet:
+      id: 1697809001435-5
+      author: matte (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addUniqueConstraint:
+            columnNames: name
+            constraintName: county_name_key
+            tableName: county
+  - changeSet:
+      id: 1697809001435-6
+      author: matte (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addUniqueConstraint:
+            columnNames: municipalities_id
+            constraintName: county_municipality_municipalities_id_key
+            tableName: county_municipality
+  - changeSet:
+      id: 1697809001435-7
+      author: matte (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addUniqueConstraint:
+            columnNames: name
+            constraintName: municipality_name_key
+            tableName: municipality
+  - changeSet:
+      id: 1697809001435-8
+      author: matte (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: municipalities_id
+            baseTableName: county_municipality
+            constraintName: fkf7i5optcvq863p4ulpcdivhe3
+            onDelete: NO ACTION
+            onUpdate: NO ACTION
+            referencedColumnNames: id
+            referencedTableName: municipality
+  - changeSet:
+      id: 1697809001435-9
+      author: matte (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: county_id
+            baseTableName: county_municipality
+            constraintName: fkphnepyc4nlbh5wshrtgd9hjdk
+            onDelete: NO ACTION
+            onUpdate: NO ACTION
+            referencedColumnNames: id
+            referencedTableName: county
+
