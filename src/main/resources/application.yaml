@@ -6,8 +6,8 @@ spring:
     config:
       enabled: true
   datasource:
-    username: postgres
-    password: postgres
+    username: locations
+    password: locations
     url: jdbc:postgresql://localhost:5438/locations
     driver-class-name: org.postgresql.Driver
    
