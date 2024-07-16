@@ -15,6 +15,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
@@ -40,7 +41,8 @@ public class County {
 
 	@Column(name = "code", nullable = false, unique = true)
 	private int code;
-	@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE, region = "municipalities-county")
+	@Setter
+    @Cache(usage = CacheConcurrencyStrategy.TRANSACTIONAL, region = "municipalities-county")
 	@OneToMany(orphanRemoval = true, fetch = FetchType.LAZY,cascade = CascadeType.PERSIST)
 	private Set<Municipality> municipalities = new HashSet<>();
 
@@ -48,7 +50,4 @@ public class County {
 	@Column(name = "version")
 	private Integer version;
 
-	public void setMunicipalities(Set<Municipality> municipalities) {
-		this.municipalities = municipalities;
-	}
 }

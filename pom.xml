@@ -142,6 +142,7 @@
                             <buildpack>gcr.io/paketo-buildpacks/health-checker:latest</buildpack>
                         </buildpacks>
                         <name>${imageName}</name>
+                        <createdDate>${maven.build.timestamp}</createdDate>
                     </image>
                     <imageBuilder>paketobuildpacks/builder-jammy-tiny</imageBuilder>
                     <excludes>

@@ -13,14 +13,14 @@ import se.disabledsecurity.borg.alcove.service.LocationService;
 @RestController
 public class LocationsController {
 
-	private final LocationService locationService;
+    private final LocationService locationService;
 
-	public LocationsController(LocationService locationService) {
-		this.locationService = locationService;
-	}
+    public LocationsController(LocationService locationService) {
+        this.locationService = locationService;
+    }
 
-	@PostMapping("/locations")
-	public Locations uploadLocations(@RequestParam("locations") MultipartFile file) {
-		return locationService.handleFileUpload(file);
-	}
+    @PostMapping("/locations")
+    public Locations uploadLocations(@RequestParam("locations") MultipartFile file) {
+        return locationService.handleFileUpload(file);
+    }
 }
